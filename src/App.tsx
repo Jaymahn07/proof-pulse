@@ -47,7 +47,7 @@ const App = () => {
     const toPct = (x: number | undefined | null) =>
         Math.max(0, Math.min(100, Math.round(((x ?? 0) as number) * 100)))
 
-    const aiPct = Math.round(((resultJson?.sightengine?.type?.ai_generated ?? 0) as number) * 100)
+
 
     const localData =
         [
@@ -71,18 +71,9 @@ const App = () => {
     }
 
 
-    const getScoreByLabel = (label: string) => {
-        const idx = breakdownMetrics.findIndex(
-            n => n.trim().toLowerCase() === label.trim().toLowerCase()
-        )
-        const raw = idx >= 0 ? (breakdownScores[idx] ?? 0) : 0
-        return raw <= 1 ? Math.round(raw * 100) : Math.round(raw)
-    }
 
-    const diffusionNames = [
-        'Other', 'Wan', 'Stable Diffusion', 'Reve', 'Recraft', 'Qwen',
-        'MidJourney', 'Imagen', 'Ideogram', 'GPT-4o', 'Flux', 'Firefly', 'Dall-E',
-    ]
+
+
 
     const CustomTooltip = ({ active, payload }: any) => {
         if (active && payload && payload.length) {
@@ -437,7 +428,7 @@ const App = () => {
                                     <h4 className="mb-2 text-[13px] font-medium text-slate-500">Hybrid Summary</h4>
                                     <ResponsiveContainer width="100%" height={460}>
                                         <RadialBarChart innerRadius="20%" outerRadius="90%" data={hybridData}>
-                                            <RadialBar minAngle={12} background clockWise dataKey="value" />
+                                            <RadialBar dataKey="value" clockWise background />
                                             <Legend />
                                             <Tooltip content={<CustomTooltip />} />
                                         </RadialBarChart>
@@ -491,6 +482,9 @@ const App = () => {
                     )
                 }
                 {error && <div className="error">{error}</div>}
+                {result && (
+                    <div className="result"><pre>{result}</pre></div>
+                )}
                 <section className="col-span-2 mt-16 sm:mt-26 flex flex-col gap-10 sm:gap-20">
                     <div className="text-center space-y-3">
                         <h2 className="text-3xl md:text-5xl font-extrabold max-w-[60%] leading-15 mx-auto text-slate-900">
