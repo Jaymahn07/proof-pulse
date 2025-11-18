@@ -428,7 +428,7 @@ const App = () => {
                                     <h4 className="mb-2 text-[13px] font-medium text-slate-500">Hybrid Summary</h4>
                                     <ResponsiveContainer width="100%" height={460}>
                                         <RadialBarChart innerRadius="20%" outerRadius="90%" data={hybridData}>
-                                            <RadialBar dataKey="value" clockWise background />
+                                            <RadialBar dataKey="value" background />
                                             <Legend />
                                             <Tooltip content={<CustomTooltip />} />
                                         </RadialBarChart>
