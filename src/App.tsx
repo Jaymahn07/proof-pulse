@@ -26,7 +26,6 @@ const App = () => {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    const [result, setResult] = useState<string | null>(null)
     const [resultJson, setResultJson] = useState<any | null>(null)
     const [isDragging, setIsDragging] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
