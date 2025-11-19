@@ -222,14 +222,28 @@
 .hud-overlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 50; 
   pointer-events: auto;
-  background: rgba(15, 23, 42, 0.35);
+  background: rgba(15,23,42,0.35);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(2px) saturate(120%);
+}
+
+@media (max-width: 640px) {
+  .hud-overlay {
+    flex-direction: column;
+    padding: 16px;
+  }
+  .hud-ring {
+    margin-bottom: 12px;
+  }
+  .hud-legend {
+    width: 100%;
+    margin-top: 12px;
+  }
 }
 
 .hud-grid {
