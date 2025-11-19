@@ -261,12 +261,12 @@ const App = () => {
     return (
         <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 mt-10">
             <div className='flex m-3 justify-between items-center flex-wrap gap-4 mb-10'>
-                <div className="inline-flex items-center gap-2">
-                    <span className="text-3xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">Proof</span>
+                <div className="md:text-3xl inline-flex items-center gap-2">
+                    <span className="font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">Proof</span>
                     <svg className="h-6 w-6 -mx-1 text-blue-600 drop-shadow-md" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M13 3 L4 14 H11 L9 21 L20 10 H13 L15 3 Z" />
                     </svg>
-                    <span className="text-3xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">pulse</span>
+                    <span className="font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700">pulse</span>
                 </div>
                 <div className='flex justify-between gap-6 sm:gap-10'>
 
@@ -275,20 +275,20 @@ const App = () => {
             </div>
 
             <div className="grid pt-10 sm:pt-16 gap-8" ref={mainRef}>
-                <div className='flex flex-col md:flex-row flex-col-reverse items-start gap-8 col-span-2 '>
-                    <section className="space-y-4 w-full md:w-1/2 md:pr-6">
-                        <h1 className="text-3xl sm:text-4xl md:text-[3.4rem] font-extrabold leading-tight text-slate-900 max-w-2xl">
+                <div className='flex sm:flex-col md:flex-row flex-col-reverse items-start gap-8 col-span-2 '>
+                    <section className="space-y-3 sm:space-y-4 w-full md:w-1/2 md:pr-6">
+                        <h1 className="text-3xl sm:text-4xl md:text-[3.4rem] font-extrabold leading-tight text-slate-900 max-w-none md:max-w-2xl">
                             Detect <span className='text-[#007AFF]'>AI-Generated Images</span> instantly
                         </h1>
-                        <p className="mt-6 sm:mt-8 text-base sm:text-[1.2rem] text-slate-600 max-w-xl">
+                        <p className="mt-4 sm:mt-8 text-sm sm:text-base md:text-[1.2rem] text-slate-600 w-full md:max-w-xl">
                             ProofPulse is a powerful image-analysis tool built to detect AI-generated visuals with precision. Upload any image and receive a clear, detailed forensic report in seconds. <span className='font-bold'> Try ProofPulse and see the truth behind every pixel.</span>
                         </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                            <div className="rounded-xl backdrop-blur w-full sm:w-[80%]  py-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-5">
+                            <div className="rounded-xl backdrop-blur w-full sm:w-[80%] py-4 sm:py-5">
                                 <div className="text-4xl font-extrabold tracking-tight text-[#007AFF]">35M+</div>
                                 <div className="mt-2 text-sm text-slate-600 " >The amount of ai-generated images created per day</div>
                             </div>
-                            <div className="rounded-xl py-5 w-full sm:w-[80%] ">
+                            <div className="rounded-xl py-4 sm:py-5 w-full sm:w-[80%] ">
                                 <div className="text-4xl font-extrabold tracking-tight text-[#007AFF]">15B+</div>
                                 <div className="mt-2 text-sm text-slate-600">And counting: the number of AI-generated photos online.e</div>
                             </div>
@@ -341,17 +341,17 @@ const App = () => {
                 </div>
                 {
                     resultJson && (
-                        <div className="space-y-6 col-span-2 ">
+                        <div className="space-y-6 col-span-2 px-4 sm:px-0">
                             <div className='text-center text-xl sm:text-2xl my-10 sm:my-20'>Analysis Result</div>
-                            <div className="verdict-header">
-                                <span className="verdict-label text-2xl font-semibold text-slate-700">Verdict</span>
+                            <div className="verdict-header flex flex-wrap items-center justify-center sm:justify-between gap-2">
+                                <span className="verdict-label text-base sm:text-2xl font-semibold text-slate-700">Verdict</span>
                                 <span className={`verdict-text ${(resultJson.hybrid?.final_ai_score ?? 0) >= 70 ? 'ai bg-red-50 text-red-700 ring-1 ring-red-200' : 'human bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'} px-2.5 py-1 rounded-full text-xs font-medium`}>
                                     {(resultJson.hybrid?.final_ai_score ?? 0) >= 70 ? 'Likely AI-generated' : 'Likely human-made'}
                                 </span>
                             </div>
-                            <div className='h-[300px]'>
-                                <div className="donut-wrap relative rounded-xl">
-                                    <ResponsiveContainer width="100%" height={260}>
+                            <div className='h-[220px] sm:h-[300px]'>
+                                <div className="donut-wrap relative rounded-xl w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
+                                    <ResponsiveContainer width="100%" height="100%">
                                         <PieChart>
                                             <Pie
                                                 data={[
@@ -398,7 +398,7 @@ const App = () => {
                                 {/* Breakdown Scores (bar chart) */}
                                 <div className="chart-wrap rounded-xl border border-slate-200 bg-white/70 p-4 shadow-sm">
                                     <h4 className="mb-2 text-[13px] font-medium text-slate-500">Breakdown Scores</h4>
-                                    <ResponsiveContainer width="100%" height={460}>
+<ResponsiveContainer width="100%" height={typeof window !== 'undefined' && window.innerWidth < 640 ? 560 : 320} className="overflow-x-auto">
                                         <BarChart data={breakdownData}>
                                             <CartesianGrid strokeDasharray="3 3" />
                                             <XAxis dataKey="name" />
@@ -412,7 +412,7 @@ const App = () => {
 
                                 <div className="chart-wrap rounded-xl border border-slate-200 bg-white/70 p-4 shadow-sm">
                                     <h4 className="mb-2 text-[13px] font-medium text-slate-500">Local Forensics</h4>
-                                    <ResponsiveContainer width="100%" height={460}>
+                                    <ResponsiveContainer width="100%" height={320}>
                                         <RadarChart data={localData}>
                                             <PolarGrid />
                                             <PolarAngleAxis dataKey="name" />
@@ -426,7 +426,7 @@ const App = () => {
                                 {/* Hybrid Summary (radial bar chart) */}
                                 <div className="chart-wrap rounded-xl border border-slate-200 bg-white/70 p-4 shadow-sm">
                                     <h4 className="mb-2 text-[13px] font-medium text-slate-500">Hybrid Summary</h4>
-                                    <ResponsiveContainer width="100%" height={460}>
+                                    <ResponsiveContainer width="100%" height={typeof window !== 'undefined' && window.innerWidth < 640 ? 560 : 320}>
                                         <RadialBarChart innerRadius="20%" outerRadius="90%" data={hybridData}>
                                             <RadialBar dataKey="value" background />
                                             <Legend />
@@ -437,7 +437,7 @@ const App = () => {
                             </div>
                             <div className="response-panel space-y-4">
                                 <div className="rp-title text-sm font-semibold text-slate-700">Analysis Summary</div>
-                                <div className="rp-cards grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <div className="rp-cards grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                                     <div className="rp-card rounded-xl border border-slate-200 bg-white/70 p-3 shadow-sm">
                                         <div className="rp-label text-xs text-slate-500">AI generated</div>
                                         <div className="rp-value mt-1 text-sm font-semibold text-slate-900">{toPercent(resultJson?.sightengine?.type?.ai_generated)}%</div>
@@ -482,27 +482,24 @@ const App = () => {
                     )
                 }
                 {error && <div className="error">{error}</div>}
-                {result && (
-                    <div className="result"><pre>{result}</pre></div>
-                )}
-                <section className="col-span-2 mt-16 sm:mt-26 flex flex-col gap-10 sm:gap-20">
+                <section className="col-span-2 mt-12 sm:mt-20 flex flex-col gap-8 sm:gap-16 px-4 sm:px-0">
                     <div className="text-center space-y-3">
-                        <h2 className="text-3xl md:text-5xl font-extrabold max-w-[60%] leading-15 mx-auto text-slate-900">
+                        <h2 className="text-3xl md:text-5xl font-extrabold md:max-w-[60%] md:leading-15 mx-auto text-slate-900">
                             The Hidden Risks Behind Generated Images
                         </h2>
-                        <p className="text-slate-600 w-[50%] mx-auto mt-10 text-xl">
+                        <p className="text-slate-600 w-full md:w-[50%] mx-auto mt-6 sm:mt-8 text-base sm:text-xl">
                             AI-generated images keep getting more convincing and unfortunately, they’re also being misused in harmful ways. Here’s how:
                         </p>
                     </div>
 
-                    <div className="mt-12 sm:mt-20 flex flex-col md:flex-row items-center justify-between gap-8 sm:gap-20 ">
+                    <div className="mt-10 sm:mt-16 flex sm:flex-col flex-col-reverse md:flex-row items-center justify-between gap-6 sm:gap-12 lg:gap-20 ">
                         <div className="rounded-2xl h-[240px] md:h-[400px] w-full md:w-[80%] flex gap-8 sm:gap-20 overflow-hidden shadow-sm bg-white/70 backdrop-blur border border-slate-200">
                             <img className="w-full h-auto rounded-2xl object-cover" src={image1} alt="Example manipulated portrait" />
 
                         </div>
                         <div className="space-y-2 w-full md:w-[80%]">
-                            <h3 className="text-2xl sm:text-4xl md:text-5xl leading-15 font-bold text-slate-900">Fake News and Propaganda</h3>
-                            <p className="text-slate-600 w-full md:w-[80%] text-base sm:text-[1.2rem] mt-4">
+                            <h3 className="text-2xl sm:text-4xl md:text-5xl md:leading-15 font-bold text-slate-900">Fake News and Propaganda</h3>
+                            <p className="text-slate-600 w-full md:w-[80%] text-sm sm:text-base md:text-[1.2rem] mt-3 sm:mt-4">
                                 AI can fabricate realistic scenes of people saying or doing things they never did. This spreads misinformation, sows discord, and manipulates public opinion.
                             </p>
                         </div>
@@ -511,8 +508,8 @@ const App = () => {
 
                     <div className="mt-12 sm:mt-20 flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-16 lg:gap-24 ">
                         <div className="space-y-2 w-full md:w-[80%]">
-                            <h3 className="text-2xl sm:text-4xl md:text-5xl leading-15 font-bold text-slate-900">Image Theft and Copyright Violations</h3>
-                            <p className="text-slate-600 w-full md:w-[90%] text-base sm:text-[1.2rem] mt-4">
+                            <h3 className="text-2xl sm:text-4xl md:text-5xl md:leading-15 font-bold text-slate-900">Image Theft and Copyright Violations</h3>
+                            <p className="text-slate-600 w-full md:w-[90%] text-sm sm:text-base md:text-[1.2rem] mt-3 sm:mt-4">
                                 AI can produce images that closely mimic copyrighted work, which can undermine artists’ livelihoods and make it harder for them to protect their creative rights.
                             </p>
                         </div>
@@ -522,12 +519,12 @@ const App = () => {
                     </div>
 
 
-                    <div className="mt-12 sm:mt-20 flex flex-col md:flex-row justify-between items-center gap-8 sm:gap-16 lg:gap-24 ">
+                    <div className="mt-12 sm:mt-20 flex sm:flex-col flex-col-reverse md:flex-row justify-between items-center gap-8 sm:gap-16 lg:gap-24 ">
                         <div className="rounded-2xl h-[240px] md:h-[400px] w-full md:w-[80%] flex gap-8 sm:gap-20 overflow-hidden shadow-sm bg-white/70 backdrop-blur border border-slate-200">
                             <img className="w-full h-auto rounded-2xl object-cover" src={fraud} alt="Example manipulated portrait" />
                         </div>
                         <div className="space-y-2 w-full md:w-[80%]">
-                            <h3 className="text-2xl sm:text-4xl md:text-5xl leading-15 font-bold text-slate-900">Identity Fraud</h3>
+                            <h3 className="text-2xl sm:text-4xl md:text-5xl md:leading-15 font-bold text-slate-900">Identity Fraud</h3>
                             <p className="text-slate-600 w-full md:w-[90%] text-base sm:text-[1.2rem] mt-4">
                                AI-generated images can be used to forge identification documents, enabling identity theft, bypassing KYC verification on crypto platforms, and supporting various other forms of fraud.
                             </p>
@@ -542,41 +539,41 @@ const App = () => {
                             Clear Answers to few <span className="text-[#007AFF]"> Questions </span>
                         </h2>
                     </div>
-                    <div className="mt-18 space-y-4 max-w-3xl mx-auto px-4">
-                        <details className="rounded-2xl bg-white/80 shadow-md p-5">
-                            <summary className="flex cursor-pointer items-center justify-between gap-4">
-                                <span className="text-slate-900 text-[1.2rem] font-semibold">What is Proofpulse and how does it work?</span>
-                                <span className="flex h-8 w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-[1.2rem] transition-transform open:rotate-45">+</span>
+                    <div className="mt-10 sm:mt-18 space-y-3 sm:space-y-4 w-full max-w-3xl mx-auto px-4 sm:px-6">
+                        <details className="rounded-2xl bg-white/80 shadow-md p-4 sm:p-5">
+                            <summary className="flex cursor-pointer items-center justify-between gap-3 sm:gap-4">
+                                <span className="text-slate-900 text-base sm:text-[1.1rem] md:text-[1.2rem] font-semibold">What is Proofpulse and how does it work?</span>
+                                <span className="flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-lg sm:text-[1.2rem] transition-transform open:rotate-45">+</span>
                             </summary>
-                            <div className="mt-3 text-slate-600">Upload an image and we run forensic and model analysis to estimate whether it was AI-generated and why.</div>
+                            <div className="mt-2 sm:mt-3 text-slate-600 text-sm sm:text-base">Upload an image and we run forensic and model analysis to estimate whether it was AI-generated and why.</div>
                         </details>
-                        <details className="rounded-2xl bg-white/80 shadow-md p-4">
-                            <summary className="flex cursor-pointer items-center justify-between gap-4">
-                                <span className="text-slate-900 text-[1.2rem] font-semibold">How do I use Proofpulse?</span>
-                                <span className="flex h-8 w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-[1.2rem] transition-transform open:rotate-45">+</span>
+                        <details className="rounded-2xl bg-white/80 shadow-md p-3 sm:p-4">
+                            <summary className="flex cursor-pointer items-center justify-between gap-3 sm:gap-4">
+                                <span className="text-slate-900 text-base sm:text-[1.1rem] md:text-[1.2rem] font-semibold">How do I use Proofpulse?</span>
+                                <span className="flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-lg sm:text-[1.2rem] transition-transform open:rotate-45">+</span>
                             </summary>
-                            <div className="mt-3 text-slate-600">Drag an image into the dropzone or select a file, then click Analyze to see the report.</div>
+                            <div className="mt-2 sm:mt-3 text-slate-600 text-sm sm:text-base">Drag an image into the dropzone or select a file, then click Analyze to see the report.</div>
                         </details>
-                        <details className="rounded-2xl bg-white/80 shadow-md p-4">
-                            <summary className="flex cursor-pointer items-center justify-between gap-4">
-                                <span className="text-slate-900 text-[1.2rem] font-semibold">Can I use Proofpulse on mobile devices?</span>
-                                <span className="flex h-8 w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-[1.2rem] transition-transform open:rotate-45">+</span>
+                        <details className="rounded-2xl bg-white/80 shadow-md p-3 sm:p-4">
+                            <summary className="flex cursor-pointer items-center justify-between gap-3 sm:gap-4">
+                                <span className="text-slate-900 text-base sm:text-[1.1rem] md:text-[1.2rem] font-semibold">Can I use Proofpulse on mobile devices?</span>
+                                <span className="flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-lg sm:text-[1.2rem] transition-transform open:rotate-45">+</span>
                             </summary>
-                            <div className="mt-3 text-slate-600">Yes, the interface is responsive and works on modern mobile browsers.</div>
+                            <div className="mt-2 sm:mt-3 text-slate-600 text-sm sm:text-base">Yes, the interface is responsive and works on modern mobile browsers.</div>
                         </details>
-                        <details className="rounded-2xl bg-white/80 shadow-md p-4">
-                            <summary className="flex cursor-pointer items-center justify-between gap-4">
-                                <span className="text-slate-900 text-[1.2rem] font-semibold">Are there any limitations to the types of images I can analyze?</span>
-                                <span className="flex h-8 w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-[1.2rem] transition-transform open:rotate-45">+</span>
+                        <details className="rounded-2xl bg-white/80 shadow-md p-3 sm:p-4">
+                            <summary className="flex cursor-pointer items-center justify-between gap-3 sm:gap-4">
+                                <span className="text-slate-900 text-base sm:text-[1.1rem] md:text-[1.2rem] font-semibold">Are there any limitations to the types of images I can analyze?</span>
+                                <span className="flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-lg sm:text-[1.2rem] transition-transform open:rotate-45">+</span>
                             </summary>
-                            <div className="mt-3 text-slate-600">Common formats like PNG, JPG/JPEG, WEBP, and BMP are supported. Very large files may be slower.</div>
+                            <div className="mt-2 sm:mt-3 text-slate-600 text-sm sm:text-base">Common formats like PNG, JPG/JPEG, WEBP, and BMP are supported. Very large files may be slower.</div>
                         </details>
-                        <details className="rounded-2xl bg-white/80 shadow-md p-4">
-                            <summary className="flex cursor-pointer items-center justify-between gap-4">
-                                <span className="text-slate-900 text-[1.2rem] font-semibold">Does Proofpulse store the images I upload for analysis?</span>
-                                <span className="flex h-8 w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-[1.2rem] transition-transform open:rotate-45">+</span>
+                        <details className="rounded-2xl bg-white/80 shadow-md p-3 sm:p-4">
+                            <summary className="flex cursor-pointer items-center justify-between gap-3 sm:gap-4">
+                                <span className="text-slate-900 text-base sm:text-[1.1rem] md:text-[1.2rem] font-semibold">Does Proofpulse store the images I upload for analysis?</span>
+                                <span className="flex h-9 w-9 sm:h-8 sm:w-8 items-center justify-center border-blue-400 rounded-lg border text-blue-400 text-lg sm:text-[1.2rem] transition-transform open:rotate-45">+</span>
                             </summary>
-                            <div className="mt-3 text-slate-600">ProofPulse never stores images on local devices. All processing and analysis are performed securely on the backend, ensuring no persistent image data is retained.</div>
+                            <div className="mt-2 sm:mt-3 text-slate-600 text-sm sm:text-base">ProofPulse never stores images on local devices. All processing and analysis are performed securely on the backend, ensuring no persistent image data is retained.</div>
                         </details>
                     </div>
                 </section>
