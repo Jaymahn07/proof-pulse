@@ -229,7 +229,17 @@ const App = () => {
     const rafId = useRef<number | null>(null)
     const targetRef = useRef<number>(92)
     const thresholds = [0, 12, 28, 46, 64, 82, 95]
-
+const explanations = {
+  breakdown_components: {
+    Sightengine: "An external AI model’s opinion on whether the image looks AI-generated. Higher values mean it strongly resembles synthetic content.",
+    Frequency: "Analyzes fine details and texture patterns. Lower values usually mean the image is too smooth, which is common in AI-generated images.",
+    Noise: "Measures natural camera noise and edge imperfections. Very low noise can suggest the image was artificially generated or heavily processed.",
+    Compression: "Looks at compression artifacts and consistency. Unusual or low variability can indicate editing or recompression.",
+    Color: "Checks how color channels relate to each other. Unnatural color relationships may point to artificial image generation.",
+    "Color correction": "Detects abnormal color adjustments. Overly clean or unnatural color correction can signal digital manipulation.",
+    Metadata: "Evaluates missing or altered image metadata (like camera info). Lack of metadata can increase suspicion of manipulation."
+  }
+}
     useEffect(() => {
         if (!loading) {
             if (rafId.current) cancelAnimationFrame(rafId.current)
@@ -273,6 +283,8 @@ const App = () => {
                     <h3 className='cursor-pointer hover:opacity-75' onClick={() => setContactOpen(true)}>Contact</h3>
                 </div>
             </div>
+
+            
 
             <div className="grid pt-10 sm:pt-16 gap-8" ref={mainRef}>
                 <div className='flex sm:flex-col md:flex-row flex-col-reverse items-start gap-8 col-span-2 '>
@@ -338,8 +350,9 @@ const App = () => {
                             {loading ? 'Analyzing…' : 'Analyze Image'}
                         </button>
                     </form>
+                    
                 </div>
-                {
+                 {
                     resultJson && (
                         <div className="space-y-6 col-span-2 px-4 sm:px-0">
                             <div className='text-center text-xl sm:text-2xl my-10 sm:my-20'>Analysis Result</div>
@@ -435,8 +448,8 @@ const App = () => {
                                     </ResponsiveContainer>
                                 </div>
                             </div>
-                            <div className="response-panel space-y-4">
-                                <div className="rp-title text-sm font-semibold text-slate-700">Analysis Summary</div>
+                            <div className="response-panel space-y-4 ">
+                                <div className="rp-title  text-sm font-semibold text-slate-700">Analysis Summary</div>
                                 <div className="rp-cards grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                                     <div className="rp-card rounded-xl border border-slate-200 bg-white/70 p-3 shadow-sm">
                                         <div className="rp-label text-xs text-slate-500">AI generated</div>
@@ -466,8 +479,11 @@ const App = () => {
                                     </div>
                                 </div>
 
-                                <div className="rp-title mt-3 text-sm font-semibold text-slate-700">Breakdown</div>
-                                <div className="rp-bars space-y-2">
+                          
+                               
+
+                                <div className="rp-title mt-14 text-sm pl-2 font-semibold text-slate-700">Breakdown</div>
+                                <div className="rp-bars space-y-2 pl-2">
                                     {(resultJson?.breakdown?.metrics ?? []).map((name: string, i: number) => (
                                         <BarRow
                                             key={`${name}-${i}`}
@@ -477,11 +493,23 @@ const App = () => {
                                         />
                                     ))}
                                 </div>
+                                 <div className="rp-title mt-14 pl-2  font-semibold text-transparent bg-clip-text bg-gradient-to-r from-slate-800 via-blue-600 to-slate-800  ">Component Explanations</div>
+                                <div className="grid grid-cols-1 pl-2 sm:grid-cols-2 gap-3 sm:gap-4 rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-white/80 to-slate-50 ring-1 ring-slate-200 shadow-lg">
+                                    {Object.entries(explanations.breakdown_components).map(([name, desc], i) => (
+                                        <div key={`exp-${i}`} className="group flex items-start flex-col gap-4 rounded-xl px-4 py-3 ring-1 ring-slate-200 bg-white/80 hover:bg-white shadow-sm hover:shadow-md transition">
+                                            <div className="min-w-[170px] text-sm sm:text-base font-semibold text-slate-800">{name}</div>
+                                            <div className="text-sm text-slate-700 leading-snug">{desc}</div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     )
+                    
                 }
+                
                 {error && <div className="error">{error}</div>}
+               
                 <section className="col-span-2 mt-12 sm:mt-20 flex flex-col gap-8 sm:gap-16 px-4 sm:px-0">
                     <div className="text-center space-y-3">
                         <h2 className="text-3xl md:text-5xl font-extrabold md:max-w-[60%] md:leading-15 mx-auto text-slate-900">
